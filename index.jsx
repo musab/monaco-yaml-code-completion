@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import MonacoEditor from "react-monaco-editor";
 import "monaco-yaml/lib/esm/monaco.contribution";
 import { languages } from "monaco-editor/esm/vs/editor/editor.api";
+import circleciconfig from "./circleciconfig.json";
 
 // NOTE: This will give you all editor featues. If you would prefer to limit to only the editor
 // features you want to use, import them each individually. See this example: (https://github.com/microsoft/monaco-editor-samples/blob/master/browser-esm-webpack-small/index.js#L1-L91)
@@ -24,7 +25,8 @@ window.MonacoEnvironment = {
 
 const { yaml } = languages || {};
 
-console.log(languages);
+const resolveRelativeUrl = (url) =>
+  new URL(url, window.location.href).toString();
 
 const Editor = () => {
   const [value, setValue] = useState(null);
@@ -39,7 +41,7 @@ const Editor = () => {
         format: true,
         schemas: [
           {
-            uri: "https://json.schemastore.org/circleciconfig",
+            uri: resolveRelativeUrl("./circleciconfig.json"),
             fileMatch: ["*"],
           },
         ],
