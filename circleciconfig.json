@@ -3,7 +3,6 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "A representation of a executors in circleci config.yml",
   "type": "object",
-  "additionalProperties": false,
   "properties": {
     "executors": {
       "type": "object",
@@ -11,12 +10,7 @@
       "properties": {
         "image": {
           "type": "string",
-          "default": "ubuntu-2004:202010-01",
-          "enum": [
-            "ubuntu-2004:202010-01",
-            "ubuntu-1604:202010-01",
-            "ubuntu-1604:202007-01"
-          ],
+          "enum": ["ubuntu-01", "ubuntu-02", "ubuntu-03"],
           "description": "The VM image to use. View available images. Note: This key is not supported on the installable CircleCI. For information about customizing machine executor images on CircleCI installed on your servers, see our VM Service documentation."
         },
         "docker_layer_caching": {
@@ -35,6 +29,16 @@
         "executors": {
           "image": "$1",
           "docker_layer_caching": "$2"
+        }
+      }
+    },
+    {
+      "label": "Executor Template (prefilled)",
+      "description": "representation of a executors",
+      "body": {
+        "executors": {
+          "image": "ubuntu-01",
+          "docker_layer_caching": false
         }
       }
     }
